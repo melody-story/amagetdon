@@ -37,4 +37,20 @@ public class GroupServiceTest {
         //then
         Assertions.assertThat(one.get().getId()).isEqualTo(groupId);
     }
+
+    @Test
+    public void updateBudget() throws Exception {
+        //given
+        Budget budget = new Budget();
+        budget.setName("밴드동아리예산");
+        budget.setBudgetAmount(5000);
+        Long groupId = groupService.save(budget);
+        //when
+        groupService.updateBudget(groupId, budget.getName(),
+                budget.getDescription(), 6000, budget.getImageUrl());
+        Budget findOne = (Budget) groupService.findOne(groupId).get();
+        //then
+        Assertions.assertThat(findOne).isSameAs(budget);
+        Assertions.assertThat(findOne.getBudgetAmount()).isEqualTo(6000);
+    }
 }
