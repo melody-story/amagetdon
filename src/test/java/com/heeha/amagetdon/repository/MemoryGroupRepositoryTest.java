@@ -2,16 +2,20 @@ package com.heeha.amagetdon.repository;
 
 import com.heeha.amagetdon.domain.group.Budget;
 import com.heeha.amagetdon.domain.group.Group;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class MemoryGroupRepositoryTest {
-
-    MemoryGroupRepository repository = new MemoryGroupRepository();
+    MemoryGroupRepository repository;
+    @BeforeEach
+    public void beforeEach() {
+        this.repository = new MemoryGroupRepository();
+    }
 
     @AfterEach
     public void afterEach() {
