@@ -14,5 +14,5 @@ public interface GroupRepository {
 
     public List<Group> findAll();
 
-    public Long modify(Long id,String name, String desc, int amount, String imageUrl);
+    public Long modifyBudget(Long id,String name, String desc, int amount, String imageUrl);
 }

@@ -17,6 +17,7 @@ public class MemoryGroupRepositoryTest {
     public void afterEach() {
         repository.clearStore();
     }
+
     @Test
     public void save() {
         Budget budget = createBudget("어부들",200);
@@ -24,6 +25,7 @@ public class MemoryGroupRepositoryTest {
         Optional<Group> result = repository.findById(budgetId);
         assertThat(budget.getName()).isSameAs(result.get().getName());
     }
+
     @Test
     public void findById() throws Exception{
         Budget budget = createBudget("증인들", 200);
@@ -43,12 +45,14 @@ public class MemoryGroupRepositoryTest {
     }
 
     @Test
-    public  void modify() throws Exception {
+    public void modifyBudget() throws Exception {
         //given
         Budget budget = createBudget("어부들", 400);
         repository.save(budget);
+
         //when
-        Long result = repository.modify(budget.getId(), "증인들", "", 500, "");
+        Long result = repository.modifyBudget(budget.getId(), "증인들", "", 500, "");
+
         //then
         assertThat(budget.getName()).isEqualTo("증인들");
         assertThat(budget.getBudgetAmount()).isEqualTo(500);

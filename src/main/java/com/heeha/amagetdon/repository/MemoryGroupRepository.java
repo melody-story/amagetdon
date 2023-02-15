@@ -31,7 +31,7 @@ public class MemoryGroupRepository implements GroupRepository{
     }
 
     @Override
-    public Long modify(Long id,String name, String desc, int amount, String imageUrl){
+    public Long modifyBudget(Long id,String name, String desc, int amount, String imageUrl){
         Optional<Group> group = this.findById(id);
         if (group.isPresent()) {
             Budget budget = (Budget) group.get();
