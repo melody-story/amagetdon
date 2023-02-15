@@ -29,7 +29,7 @@ public class GroupService {
         return groupRepository.findAll();
     }
 
-    public Optional<Group> findOne(Long id) {
+    public Optional<Group> findOneById(Long id) {
         return groupRepository.findById(id);
     }
 
