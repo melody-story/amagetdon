@@ -45,13 +45,13 @@ public class MemoryGroupRepositoryTest {
     }
 
     @Test
-    public void modifyBudget() throws Exception {
+    public void modify() throws Exception {
         //given
         Budget budget = createBudget("어부들", 400);
         repository.save(budget);
 
         //when
-        Long result = repository.modifyBudget(budget.getId(), "증인들", "", 500, "");
+        Long result = repository.modify(budget.getId(), "증인들", "","", 500);
 
         //then
         assertThat(budget.getName()).isEqualTo("증인들");

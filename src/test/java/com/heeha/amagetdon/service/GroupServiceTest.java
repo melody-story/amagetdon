@@ -81,11 +81,12 @@ public class GroupServiceTest {
         budget.setBudgetAmount(5000);
         Long groupId = groupService.save(budget);
         //when
-        groupService.updateBudget(groupId, budget.getName(),
-                budget.getDescription(), 6000, budget.getImageUrl());
+        groupService.update(groupId, budget.getName(),
+                budget.getDescription(), budget.getImageUrl(), 6000);
         Budget findOne = (Budget) groupService.findOneById(groupId).get();
         //then
         assertThat(findOne).isSameAs(budget);
         assertThat(findOne.getBudgetAmount()).isEqualTo(6000);
     }
+
 }

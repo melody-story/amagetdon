@@ -33,7 +33,11 @@ public class GroupService {
         return groupRepository.findById(id);
     }
 
-    public Long updateBudget(Long id,String name, String desc, int amount, String imageUrl){
-        return groupRepository.modifyBudget(id, name, desc, amount, imageUrl);
+    public Long update(Long id,String name, String desc, String imageUrl){
+        return groupRepository.modify(id, name, desc,imageUrl);
+    }
+
+    public Long update(Long id,String name, String desc, String imageUrl, int amount){
+        return groupRepository.modify(id, name, desc,imageUrl, amount);
     }
 }
