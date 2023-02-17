@@ -8,6 +8,10 @@ import java.util.Optional;
 public interface GroupRepository {
     public Long save(Group group);
 
+//    public Long save(String name, String desc, String imageUrl);
+
+    public Long save(String name, String desc, String imageUrl, int amount);
+
     public Optional<Group> findById(Long id);
 
     public List<Group> findAll();

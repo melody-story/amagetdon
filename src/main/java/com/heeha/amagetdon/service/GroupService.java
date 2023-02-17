@@ -25,6 +25,13 @@ public class GroupService {
         return groupRepository.save(group);
     }
 
+//    public Long save(String name, String desc, String imageUrl) {
+//        return groupRepository.save(name, desc, imageUrl);
+//    }
+    public Long save(String name, String desc, String imageUrl, int amount) {
+        return groupRepository.save(name, desc, imageUrl, amount);
+    }
+
     public List<Group> findAll() {
         return groupRepository.findAll();
     }

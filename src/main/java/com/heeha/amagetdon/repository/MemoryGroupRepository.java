@@ -18,6 +18,23 @@ public class MemoryGroupRepository implements GroupRepository{
         store.put(group.getId(), group);
         return group.getId();
     }
+//    public Long save(String name, String desc, String imageUrl) {
+//        new Group()
+//        group.setId(sequence++);
+//        store.put(group.getId(), group);
+//        return group.getId();
+//    }
+    @Override
+    public Long save(String name, String desc, String imageUrl, int amount) {
+        Budget budget = new Budget();
+        budget.setId(sequence++);
+        budget.setName(name);
+        budget.setDescription(desc);
+        budget.setImageUrl(imageUrl);
+        budget.setBudgetAmount(amount);
+        store.put(budget.getId(), budget);
+        return budget.getId();
+    }
 
     @Override
     public Optional<Group> findById(Long id) {
@@ -44,7 +61,7 @@ public class MemoryGroupRepository implements GroupRepository{
             throw new IllegalStateException("곗돈그룹이 존재하지 않습니다.");
         }
     }
-
+    @Override
     public Long modify(Long id,String name, String desc,String imageUrl, int amount){
         Optional<Group> groupOfBudget = this.findById(id);
         if (groupOfBudget.isPresent()) {
