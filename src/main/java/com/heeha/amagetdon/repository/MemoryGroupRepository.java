@@ -30,7 +30,7 @@ public class MemoryGroupRepository implements GroupRepository{
         budget.setId(sequence++);
         budget.setName(name);
         budget.setDescription(desc);
-        budget.setImageUrl(imageUrl);
+        budget.setImage(imageUrl);
         budget.setBudgetAmount(amount);
         store.put(budget.getId(), budget);
         return budget.getId();
@@ -54,7 +54,7 @@ public class MemoryGroupRepository implements GroupRepository{
             Group group = findGroup.get();
             group.setName(name);
             group.setDescription(desc);
-            group.setImageUrl(imageUrl);
+            group.setImage(imageUrl);
             this.save(group);
             return group.getId();
         } else {
@@ -69,7 +69,7 @@ public class MemoryGroupRepository implements GroupRepository{
             budget.setName(name);
             budget.setDescription(desc);
             budget.setBudgetAmount(amount);
-            budget.setImageUrl(imageUrl);
+            budget.setImage(imageUrl);
             this.save(budget);
             return budget.getId();
         } else {

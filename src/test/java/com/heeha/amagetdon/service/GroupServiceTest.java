@@ -82,7 +82,7 @@ public class GroupServiceTest {
         Long groupId = groupService.save(budget);
         //when
         groupService.update(groupId, budget.getName(),
-                budget.getDescription(), budget.getImageUrl(), 6000);
+                budget.getDescription(), budget.getImage(), 6000);
         Budget findOne = (Budget) groupService.findOneById(groupId).get();
         //then
         assertThat(findOne).isSameAs(budget);

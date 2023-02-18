@@ -1,4 +1,4 @@
-package com.heeha.amagetdon.domain.group;
+package com.heeha.amagetdon.domain.user;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,20 +9,23 @@ import javax.persistence.*;
 @Getter @Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="dtype")
-public abstract class Group {
+public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "group_id")
+    @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "group_name")
-    private String name;
+    private String nickname;
+
+    private String email;
+
+    private String phoneNumber;
 
     private String description;
 
-    @Column(name = "group_table_name")
+    @Column(name = "user_table_name")
     private String tableName;
 
-    @Column(name = "cover_image_url")
+    @Column(name = "profile_image_url")
     private String image;
 }
