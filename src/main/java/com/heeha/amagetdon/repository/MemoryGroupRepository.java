@@ -4,6 +4,7 @@ import com.heeha.amagetdon.domain.group.Budget;
 import com.heeha.amagetdon.domain.group.Group;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.DiscriminatorValue;
 import java.util.*;
 
 @Repository
@@ -14,7 +15,9 @@ public class MemoryGroupRepository implements GroupRepository{
 
     @Override
     public Long save(Group group) {
-        group.setId(sequence++);
+        group.setId(group.getId());
+        String dType = group.getClass().getAnnotation(DiscriminatorValue.class).value();
+        group.setTableName(dType);
         store.put(group.getId(), group);
         return group.getId();
     }
@@ -32,7 +35,7 @@ public class MemoryGroupRepository implements GroupRepository{
         budget.setDescription(desc);
         budget.setImage(imageUrl);
         budget.setBudgetAmount(amount);
-        store.put(budget.getId(), budget);
+        this.save(budget);
         return budget.getId();
     }
 
