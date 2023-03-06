@@ -10,23 +10,21 @@ import java.util.*;
 @Repository
 public class MemoryGroupRepository implements GroupRepository{
 
-    private static Map<Long, Group> store = new HashMap<>();
+    private static Map<Long, Group> groupStore = new HashMap<>();
+    private static Map<Long, Budget> budgetStore = new HashMap<>();
     private static long sequence = 1L;
 
     @Override
     public Long save(Group group) {
-        group.setId(group.getId());
         String dType = group.getClass().getAnnotation(DiscriminatorValue.class).value();
         group.setTableName(dType);
-        store.put(group.getId(), group);
+        groupStore.put(group.getId(), group);
+        if (Objects.equals(dType, "Budget")) {
+            budgetStore.put(group.getId(), (Budget) group);
+        }
         return group.getId();
     }
-//    public Long save(String name, String desc, String imageUrl) {
-//        new Group()
-//        group.setId(sequence++);
-//        store.put(group.getId(), group);
-//        return group.getId();
-//    }
+
     @Override
     public Long save(String name, String desc, String imageUrl, int amount) {
         Budget budget = new Budget();
@@ -41,19 +39,40 @@ public class MemoryGroupRepository implements GroupRepository{
 
     @Override
     public Optional<Group> findById(Long id) {
-        return Optional.ofNullable(store.get(id));
+        Optional<Group> findGroup = Optional.ofNullable(groupStore.get(id));
+        if (findGroup.isPresent()) {
+            return findGroup;
+        } else {
+            throw new IllegalStateException("그룹이 존재하지 않습니다.");
+        }
+    }
+
+    @Override
+    public Budget findBudgetById(Long id) {
+        Optional<Group> findGroup = Optional.ofNullable(groupStore.get(id));
+        Group group = findGroup.get();
+        String dType = group.getClass().getAnnotation(DiscriminatorValue.class).value();
+        if (Objects.equals(dType, "Budget")) {
+            return (Budget) group;
+        } else {
+            throw new IllegalStateException("그룹이 존재하지 않습니다.");
+        }
     }
 
     @Override
     public List<Group> findAll(){
-        return new ArrayList<>(store.values());
+        return new ArrayList<>(groupStore.values());
+    }
+
+    @Override
+    public List<Budget> findBudgetAll() {
+        return new ArrayList<>(budgetStore.values());
     }
 
     @Override
     public Long modify(Long id, String name, String desc, String imageUrl){
         Optional<Group> findGroup = this.findById(id);
         if (findGroup.isPresent()) {
-//            Gyetdon getdon = (Gyetdon) group.get();
             Group group = findGroup.get();
             group.setName(name);
             group.setDescription(desc);
@@ -81,6 +100,6 @@ public class MemoryGroupRepository implements GroupRepository{
     }
 
     public void clearStore() {
-        store.clear();
+        groupStore.clear();
     }
 }

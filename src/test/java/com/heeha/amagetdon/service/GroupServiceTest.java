@@ -42,15 +42,9 @@ public class GroupServiceTest {
     @Test
     public void findAll() throws Exception {
         //given
-        Budget budget_1 = new Budget();
-        budget_1.setName("밴드동아리예산");
-        budget_1.setBudgetAmount(2000);
-        Budget budget_2 = new Budget();
-        budget_2.setName("한문동아리예산");
-        budget_2.setBudgetAmount(3000);
-        Budget budget_3 = new Budget();
-        budget_3.setName("과학동아리예산");
-        budget_3.setBudgetAmount(4000);
+        Budget budget_1 = createBudget("한문동아리예산", 3000);
+        Budget budget_2 = createBudget("과학동아리예산", 4000);
+        Budget budget_3 = createBudget("논술동아리예산", 5000);
         groupService.save(budget_1);
         groupService.save(budget_2);
         groupService.save(budget_3);
@@ -58,6 +52,15 @@ public class GroupServiceTest {
         List<Group> allGroup = groupService.findAll();
         //then
         assertThat(allGroup.size()).isEqualTo(3);
+    }
+
+    public Long id = 0L;
+    public Budget createBudget(String name, int amount) {
+        Budget budget = new Budget();
+        budget.setId(id++);
+        budget.setName(name);
+        budget.setBudgetAmount(amount);
+        return budget;
     }
 
     @Test

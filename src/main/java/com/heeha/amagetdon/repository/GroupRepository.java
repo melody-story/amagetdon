@@ -1,5 +1,6 @@
 package com.heeha.amagetdon.repository;
 
+import com.heeha.amagetdon.domain.group.Budget;
 import com.heeha.amagetdon.domain.group.Group;
 
 import java.util.List;
@@ -14,9 +15,14 @@ public interface GroupRepository {
 
     public Optional<Group> findById(Long id);
 
+    public Group findBudgetById(Long id);
+
     public List<Group> findAll();
+
+    public List<Budget> findBudgetAll();
 
     public Long modify(Long id, String name, String desc, String imageUrl);
 
     public Long modify(Long id, String name, String desc, String imageUrl, int amount);
+
 }

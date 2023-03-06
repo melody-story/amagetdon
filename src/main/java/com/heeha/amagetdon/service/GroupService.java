@@ -1,5 +1,6 @@
 package com.heeha.amagetdon.service;
 
+import com.heeha.amagetdon.domain.group.Budget;
 import com.heeha.amagetdon.domain.group.Group;
 import com.heeha.amagetdon.repository.GroupRepository;
 import com.heeha.amagetdon.repository.MemoryGroupRepository;
@@ -36,8 +37,16 @@ public class GroupService {
         return groupRepository.findAll();
     }
 
+    public List<Budget> findBudgetAll() {
+        return groupRepository.findBudgetAll();
+    }
+
     public Optional<Group> findOneById(Long id) {
         return groupRepository.findById(id);
+    }
+
+    public Budget findBudgetById(Long id) {
+        return (Budget) groupRepository.findBudgetById(id);
     }
 
     public Long update(Long id,String name, String desc, String imageUrl){

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -40,10 +41,11 @@ public class MemoryGroupRepositoryTest {
     }
     @Test
     public void findAll() throws Exception {
-        Budget budget = createBudget("초등부", 400);
-        repository.save(budget);
+        Budget budget1 = createBudget("초등부", 400);
         Budget budget2 = createBudget("어부들", 500);
-        repository.save(budget2);
+        repository.save((Group) budget1);
+        repository.save((Group) budget2);
+
         int result = repository.findAll().size();
         assertThat(result).isEqualTo(2);
     }
@@ -52,18 +54,18 @@ public class MemoryGroupRepositoryTest {
     public void modify() throws Exception {
         //given
         Budget budget = createBudget("어부들", 400);
-        repository.save(budget);
-
+        Long id = repository.save(budget);
         //when
-        Long result = repository.modify(budget.getId(), "증인들", "","", 500);
+        Long result = repository.modify(id, "증인들", "","", 500);
 
         //then
         assertThat(budget.getName()).isEqualTo("증인들");
         assertThat(budget.getBudgetAmount()).isEqualTo(500);
     }
-
+    public Long id = 0L;
     public Budget createBudget(String name, int amount) {
         Budget budget = new Budget();
+        budget.setId(id++);
         budget.setName(name);
         budget.setBudgetAmount(amount);
         return budget;
