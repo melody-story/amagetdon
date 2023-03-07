@@ -11,30 +11,34 @@
       <thead>
       <tr>
         <th>#</th>
+        <th>종류</th>
         <th>그룹명</th>
         <th>설명</th>
-        <th>타입</th>
         <th>이미지</th>
-<!--        <th></th>-->
+        <th>총예산</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
 
-      <tr th:each="group : ${groups}">
-        <td th:text="${group.id}"></td>
-        <td th:text="${group.name}"></td>
-        <td th:text="${group.description}"></td>
-        <td th:text="${group.tableName}"></td>
-        <td th:text="${group.image}"></td>
+      <tr th:each="budget : ${budgets}">
+        <td th:text="${budget.id}"></td>
+        <td th:text="${budget.tableName}"></td>
+        <td th:text="${budget.name}"></td>
+        <td th:text="${budget.description}"></td>
+        <td th:text="${budget.image}"></td>
+        <td th:text="${budget.budgetAmount}"></td>
         <td>
-          <a href="#" th:href="@{/groups/{id}/edit (id=${group.id})}"
+          <a href="#" th:href="@{/budgets/{id}/edit (id=${budget.id})}"
              class="btn btn-primary" role="button">수정</a>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
-
+  <p>
+    <a class="btn btn-lg btn-info" href="/budgets/new">추가</a>
+  </p>
   <div th:replace="fragments/footer :: footer"/>
 
 </div> <!-- /container -->

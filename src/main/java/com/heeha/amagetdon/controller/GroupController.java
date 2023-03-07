@@ -1,5 +1,6 @@
 package com.heeha.amagetdon.controller;
 
+import ch.qos.logback.classic.db.names.TableName;
 import com.heeha.amagetdon.domain.group.Budget;
 import com.heeha.amagetdon.domain.group.Group;
 import com.heeha.amagetdon.service.GroupService;
@@ -7,9 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,8 +35,11 @@ public class GroupController {
 
     @GetMapping("/groups")
     public String list(Model model) {
-        List<Group> groups = groupService.findAll();
-        model.addAttribute("groups", groups);
+//        List<Group> groups = groupService.findAll();
+        List<Budget> budgets= groupService.findBudgetAll();
+        model.addAttribute("budgets", budgets);
+        log.info("===== Group Controller listFrom  =======");
         return "groups/groupList";
     }
+
 }
