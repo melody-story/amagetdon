@@ -42,4 +42,25 @@ public class GroupController {
         return "groups/groupList";
     }
 
+    @GetMapping("/budgets/{groupId}/edit")
+    public String updateBudgetForm(@PathVariable("groupId") Long groupId, Model model) {
+        BudgetForm form = new BudgetForm();
+        Budget findBudget = groupService.findBudgetById(groupId);
+        form.setId(findBudget.getId());
+        form.setName(findBudget.getName());
+        form.setDesc(findBudget.getDescription());
+        form.setImage(findBudget.getImage());
+        form.setAmount(findBudget.getBudgetAmount());
+        model.addAttribute("form", form);
+        log.info("===== Group Controller updateForm  =======");
+        return "groups/updateBudgetForm";
+    }
+
+    @PostMapping("/budgets/{groupId}")
+    public String updateBudgetForm(@ModelAttribute("form") BudgetForm form, @PathVariable Long groupId) {
+        groupService.update(groupId, form.getName(), form.getDesc(), form.getImage(), form.getAmount());
+        log.info("===== Group Controller update  =======");
+        return "redirect:/groups";
+    }
+
 }

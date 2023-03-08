@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+    <form th:object="${form}" method="post">
+        <!-- id -->
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="form-group">
+            <label th:for="name">그룹명</label>
+            <input type="text" th:field="*{name}" class="form-control"
+                   placeholder="그룹명을 입력하세요" />
+        </div>
+        <div class="form-group">
+            <label th:for="desc">그룹설명</label>
+            <input type="text" th:field="*{desc}" class="form-control"
+                   placeholder="설명을 입력하세요" />
+        </div>
+        <div class="form-group">
+            <label th:for="amount">예산 총액</label>
+            <input type="number" th:field="*{amount}" class="form-control" placeholder="예산 총액을 입력하세요" />
+        </div>
+        <div class="form-group">
+            <label th:for="image">커버이미지</label>
+            <input type="text" th:field="*{image}" class="form-control"
+                   placeholder="커버이미지를 입력하세요" />
+        </div>
+        <button type="submit" class="btn btn-primary">저장</button>
+    </form>
+
+    <div th:replace="fragments/footer :: footer" />
+
+</div> <!-- /container -->
+
+</body>
+</html>
