@@ -6,7 +6,7 @@
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
 
-    <form th:object="${form}" method="post">
+    <form th:object="${form}" method="post" th:action="@{/budgets(id=*{id})}" >
         <!-- id -->
         <input type="hidden" th:field="*{id}" />
 

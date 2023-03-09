@@ -6,6 +6,7 @@ import com.heeha.amagetdon.domain.group.Group;
 import com.heeha.amagetdon.service.GroupService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.Parameter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -56,8 +57,8 @@ public class GroupController {
         return "groups/updateBudgetForm";
     }
 
-    @PostMapping("/budgets/{groupId}")
-    public String updateBudgetForm(@ModelAttribute("form") BudgetForm form, @PathVariable Long groupId) {
+    @PostMapping("/budgets")
+    public String updateBudget(@ModelAttribute("form") BudgetForm form, @RequestParam("id") Long groupId) {
         groupService.update(groupId, form.getName(), form.getDesc(), form.getImage(), form.getAmount());
         log.info("===== Group Controller update  =======");
         return "redirect:/groups";
